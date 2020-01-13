@@ -10,7 +10,8 @@
 
 #game {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 #board {
@@ -36,9 +37,9 @@
 }
 
 .X {
-  color: blue;
+  color: #7FFF00;
 }
 
 .O {
-  color: red;
+  color: #007FFF;
 }

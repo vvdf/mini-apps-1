@@ -1,7 +1,12 @@
 class Game {
   constructor() {
+    this.init();
+  }
+
+  init() {
     this.renderer = new Render();
     this.controller = new Controller();
+    this.renderer.updateUI(this.currentPlayer());
   }
 
   playerAction(event) {
@@ -10,14 +15,22 @@ class Game {
     var player = this.currentPlayer();
 
     if (cell.innerHTML === '') {
+      // movement is possible and is being made
       cell.innerHTML = player;
       cell.className = `${cell.className} ${player}`;
+
+      // signal to update current player/other UI elements
+      this.renderer.updateUI(this.currentPlayer());
     }
 
     // check win conditions
     var winner = this.checkForWinner();
     if (winner) {
-      alert("Winner!");
+      // execute win sequence
+      alert(`${winner} has won!`);
+    } else if (this.checkForDraw()) {
+      // execute draw sequence
+      alert("It's a draw.");
     }
   }
 
@@ -55,6 +68,23 @@ class Game {
 
   checkForWinner() {
     return this.checkDiagonals() || this.checkCardinals();
+  }
+
+  checkForDraw() {
+    var turnNumber = 0;
+
+    // count total number of placements made to determine
+    // current turn number
+    for (var y = 0; y < 3; y++) {
+      for (var x = 0; x < 3; x++) {
+        var cell = select(`${x},${y}`);
+        turnNumber += cell.innerHTML === '' ? 0 : 1;
+      }
+    }
+
+    // if current turn number is 9, game is over, and if
+    // game hasn't been won, then it is a draw
+    return turnNumber > 8;
   }
 
   checkDiagonals() {

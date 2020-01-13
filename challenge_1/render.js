@@ -5,8 +5,10 @@ class Render {
 
   init() {
     // initial render of a blank board
+    this.drawUI();
     this.drawBoard();
     this.drawGrid();
+    this.updateUI();
   }
 
   drawBoard() {
@@ -63,6 +65,19 @@ class Render {
   }
 
   drawUI() {
-    
+    var game = select('game');
+    var ui = create('div');
+    ui.id = "ui";
+
+    var currentPlayer = create('h2');
+    currentPlayer.id = "currentPlayer";
+    ui.append(currentPlayer);
+
+    game.append(ui);
+  }
+
+  updateUI(player) {
+    var currentPlayer = select('currentPlayer');
+    currentPlayer.innerHTML = `It is ${player}'s turn`;
   }
 }
