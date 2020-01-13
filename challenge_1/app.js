@@ -1,4 +1,5 @@
 var select = (domElement) => document.getElementById(domElement);
+var selectByClass = (className) => document.getElementsByClassName(className);
 var create = (domElement) => document.createElement(domElement);
 
 // var game = select('game');
@@ -7,7 +8,7 @@ var create = (domElement) => document.createElement(domElement);
 // board.innerHTML = 'Example Text';
 
 // game.append(board);
-gameOne = new Game();
+game = new Game();
 
 // tic tac toe
 // basic game rules:

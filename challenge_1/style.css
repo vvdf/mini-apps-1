@@ -1,6 +1,18 @@
-.row {
+#game {
   display: flex;
   justify-content: center;
+}
+
+#board {
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  width: 300px;
+}
+
+.row {
+  display: flex;
+  /*justify-content: center;*/
 }
 
 .cell {
@@ -11,5 +23,12 @@
   font-size: 70px;
   height: 100px;
   width: 100px;
-  /*border: 1px solid black;*/
+}
+
+.X {
+  color: blue;
+}
+
+.O {
+  color: red;
 }
