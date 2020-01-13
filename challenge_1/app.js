@@ -1,8 +1,13 @@
+var select = (domElement) => document.getElementById(domElement);
+var create = (domElement) => document.createElement(domElement);
 
-var game = {
-  init: function() {
-  }
-};
+// var game = select('game');
+// var board = create('div');
+// board.className = 'board';
+// board.innerHTML = 'Example Text';
+
+// game.append(board);
+gameOne = new Game();
 
 // tic tac toe
 // basic game rules:
