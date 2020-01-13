@@ -1,6 +1,7 @@
 class Game {
   constructor() {
     this.renderer = new Render();
+    this.controller = new Controller();
   }
 
   init() {

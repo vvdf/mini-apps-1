@@ -44,4 +44,7 @@ gameOne = new Game();
     renderer object to handle all outputting and interaction with the DOM
     controller/input object to handle all functionality of connecting the
       DOM rendered objects to the game model logic
+
+  to do:
+    refactor use of spans to be divs using flexbox css styling on each row
 */

@@ -7,17 +7,19 @@ class Render {
     // initial render of a blank board
     var game = select('game');
     var board = create('div');
+    board.id = "board";
 
     // populate rows with divs
-    for (var i = 0; i < 3; i++) {
+    for (var y = 0; y < 3; y++) {
       // generate rows with divs
       var row = create('div');
-      row.id = 'row' + i;
+      row.className = 'row';
 
-      for (var j = 0; j < 3; j++) {
-        var cell = create('span');
-        cell.id = `cell (${i},${j})`;
-        cell.innerHTML = 'X';
+      for (var x = 0; x < 3; x++) {
+        var cell = create('div');
+        cell.className = 'cell';
+        cell.id = `${x},${y}`
+        cell.innerHTML = '';
         row.append(cell);
       }
       
@@ -26,5 +28,34 @@ class Render {
     }
 
     game.append(board);
+    this.drawGrid();
+  }
+
+  drawGrid() {
+    var borderStyle = '1px solid black';
+    for (var y = 0; y < 3; y++) {
+      for (var x = 0; x < 3; x++) {
+        // select a given cell
+        var cell = select(`${x},${y}`);
+        var border = '';
+
+        // check for all internal edges to add a border to
+        // using Element.setAttribute(name, value)
+        if (x > 0) { 
+          border += 'border-left: ' + borderStyle + '; ';
+        };
+        if (x < 2) { 
+          border += 'border-right: ' + borderStyle + '; ';
+        };
+        if (y > 0) { 
+          border += 'border-top: ' + borderStyle + '; ';
+        };
+        if (y < 2) { 
+          border += 'border-bottom: ' + borderStyle + '; ';
+        };
+
+        cell.setAttribute('style', border);
+      }
+    }
   }
 }
