@@ -124,7 +124,6 @@ class Game {
 
   checkCardinals() {
     var board = this.currentBoard();
-    console.log(JSON.stringify(board));
     // only 6 possible directions to traverse
     // 3 in each direction
 
