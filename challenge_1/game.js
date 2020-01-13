@@ -100,7 +100,7 @@ class Game {
         var x = moveDirection === 'right' ? 0 : 2;
 
         for (var y = 0; y < 3;) {
-          if (playerType === board[y][x]) {
+          if (board[y][x] === playerType) {
             adjacentAllies++;
           }
 
@@ -124,41 +124,46 @@ class Game {
 
   checkCardinals() {
     var board = this.currentBoard();
-
+    console.log(JSON.stringify(board));
     // only 6 possible directions to traverse
     // 3 in each direction
 
     // traverse right
     for (var y = 0; y < 3; y++) {
+      // player to compare is player at left
       var playerType = board[y][0];
-      var adjacentAllies = 1;
-      for (var x = 1; x < 3; x++) {
-        if (board[y][x] === playerType) {
-          adjacentAllies++;
-        } else {
-          break;
+      if (playerType === 'X' || playerType === 'O') {
+        // check to see if there's a valid player token to
+        // compare against
+        var adjacentAllies = 0;
+        for (var x = 0; x < 3; x++) {
+          if (board[y][x] === playerType) {
+            adjacentAllies++;
+          }
         }
-      }
 
-      if (adjacentAllies === 3) {
-        return playerType; // send winner identity up
+        if (adjacentAllies === 3) {
+          return playerType; // send winner identity up
+        }
       }
     }
 
     // traverse down
     for (var x = 0; x < 3; x++) {
       var playerType = board[0][x];
-      var adjacentAllies = 1;
-      for (var y = 1; y < 3; y++) {
-        if (board[y][x] === playerType) {
-          adjacentAllies++;
-        } else {
-          break;
+      if (playerType === 'X' || playerType === 'O') {
+        // check to see if there's a valid player token to
+        // compare against
+        var adjacentAllies = 0;
+        for (var y = 0; y < 3; y++) {
+          if (board[y][x] === playerType) {
+            adjacentAllies++;
+          }
         }
-      }
 
-      if (adjacentAllies === 3) {
-        return playerType; // send winner identity up
+        if (adjacentAllies === 3) {
+          return playerType; // send winner identity up
+        }
       }
     }
   }
