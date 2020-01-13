@@ -4,8 +4,8 @@
 }
 
 #ui {
-  display: 
-  justify-content:center;
+  display: flex;
+  justify-content: center;
 }
 
 #game {
