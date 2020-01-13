@@ -5,6 +5,11 @@ class Render {
 
   init() {
     // initial render of a blank board
+    this.drawBoard();
+    this.drawGrid();
+  }
+
+  drawBoard() {
     var game = select('game');
     var board = create('div');
     board.id = "board";
@@ -26,9 +31,7 @@ class Render {
       // populate board with created row divs
       board.append(row);
     }
-
     game.append(board);
-    this.drawGrid();
   }
 
   drawGrid() {
@@ -57,5 +60,9 @@ class Render {
         cell.setAttribute('style', border);
       }
     }
+  }
+
+  drawUI() {
+    
   }
 }

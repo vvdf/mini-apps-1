@@ -1,3 +1,13 @@
+#banner {
+  display: flex;
+  justify-content: center;
+}
+
+#ui {
+  display: 
+  justify-content:center;
+}
+
 #game {
   display: flex;
   justify-content: center;
