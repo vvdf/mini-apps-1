@@ -6,7 +6,7 @@ class Game {
   init() {
     this.renderer = new Render();
     this.controller = new Controller();
-    this.renderer.updateUI(this.currentPlayer());
+    this.renderer.updateTurn(this.currentPlayer());
   }
 
   playerAction(event) {
@@ -20,7 +20,7 @@ class Game {
       cell.className = `${cell.className} ${player}`;
 
       // signal to update current player/other UI elements
-      this.renderer.updateUI(this.currentPlayer());
+      this.renderer.updateTurn(this.currentPlayer());
     }
 
     // check win conditions

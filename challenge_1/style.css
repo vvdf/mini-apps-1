@@ -5,7 +5,9 @@
 
 #ui {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 70px;
 }
 
 #game {
@@ -34,6 +36,20 @@
   font-size: 70px;
   height: 100px;
   width: 100px;
+}
+
+.uiElement {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 33%;
+}
+
+.uiList {
+  display: flex;
+  justify-content: center;
+  margin: 0;
 }
 
 .X {

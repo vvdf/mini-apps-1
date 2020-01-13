@@ -8,7 +8,7 @@ class Render {
     this.drawUI();
     this.drawBoard();
     this.drawGrid();
-    this.updateUI();
+    this.updateTurn();
   }
 
   drawBoard() {
@@ -65,19 +65,64 @@ class Render {
   }
 
   drawUI() {
+    var uiClass = 'uiElement';
     var game = select('game');
     var ui = create('div');
     ui.id = "ui";
 
+    // create new child element to add to our UI counting
+    // number of victories by each player
+    var victoryCounter = create('div');
+    victoryCounter.setAttribute('class', uiClass);
+    victoryCounter.id = 'winCounter';
+
+    var currentVictories = create('h3');
+    currentVictories.innerHTML = 'Win Count';
+
+    var xWinList = create('div');
+    var xName = create('h4');
+    var xWinCount = create('h4');
+    xWinList.setAttribute('class', 'uiList');
+    xName.innerHTML = 'X: ';
+    xName.id = 'xName';
+    xWinCount.innerHTML = '0';
+    xWinCount.id = 'xWinCount';
+    xWinList.append(xName);
+    xWinList.append(xWinCount);
+
+    var yWinList = create('div');
+    yWinList.setAttribute('class', 'uiList');
+    var yName = create('h4');
+    var yWinCount = create('h4');
+    yName.innerHTML = 'Y: ';
+    yName.id = 'yName';
+    yWinCount.innerHTML = '0';
+    yWinCount.id = 'yWinCount';
+    yWinList.append(yName);
+    yWinList.append(yWinCount);
+
+    victoryCounter.append(currentVictories);
+    victoryCounter.append(xWinList);
+    victoryCounter.append(yWinList);
+
+    // create new child element to our UI for current player turn
     var currentPlayer = create('h2');
     currentPlayer.id = "currentPlayer";
+    currentPlayer.setAttribute('class', uiClass)
+
+    ui.append(victoryCounter);
     ui.append(currentPlayer);
 
     game.append(ui);
   }
 
-  updateUI(player) {
+  updateTurn(player) {
     var currentPlayer = select('currentPlayer');
     currentPlayer.innerHTML = `It is ${player}'s turn`;
+  }  
+
+  updateWinner(player) {
+    // var currentPlayer = select('currentPlayer');
+    // currentPlayer.innerHTML = `It is ${player}'s turn`;
   }
 }
