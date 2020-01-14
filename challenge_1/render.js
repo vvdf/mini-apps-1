@@ -132,7 +132,7 @@ class Render {
 
     var resetButton = create('button');
     resetButton.id = 'resetButton';
-    resetButton.innerHTML = 'Reset Game';
+    resetButton.innerHTML = 'New Game';
 
     lowerUi.append(resetButton);
     game.append(lowerUi);

@@ -4,6 +4,7 @@ class Game {
   }
 
   init() {
+    this.state = 'PLAY';
     this.renderer = new Render();
     this.controller = new Controller();
     this.renderer.updateTurn(this.currentPlayer());
@@ -11,30 +12,40 @@ class Game {
 
   playerAction(event) {
     // attempt movement
-    var cell = event.target;
-    var player = this.currentPlayer();
+    if (this.state === 'PLAY') {
+      // if game currently still in play, compute action
+      // otherwise do nothing
+      var cell = event.target;
+      var player = this.currentPlayer();
 
-    if (cell.innerHTML === '') {
-      // movement is possible and is being made
-      cell.innerHTML = player;
-      cell.className = `${cell.className} ${player}`;
+      if (cell.innerHTML === '') {
+        // movement is possible and is being made
+        cell.innerHTML = player;
+        cell.className = `${cell.className} ${player}`;
 
-      // signal to update current player/other UI elements
-      this.renderer.updateTurn(this.currentPlayer());
-    }
+        // signal to update current player/other UI elements
+        this.renderer.updateTurn(this.currentPlayer());
+      }
 
-    // check win conditions
-    var winner = this.checkForWinner();
-    if (winner) {
-      // execute win sequence
-      alert(`${winner} has won!`);
-    } else if (this.checkForDraw()) {
-      // execute draw sequence
-      alert("It's a draw.");
+      // check win conditions
+      var winner = this.checkForWinner();
+      if (winner) {
+        this.state = 'END';
+        // execute win sequence
+        alert(`${winner} has won!`);
+      } else if (this.checkForDraw()) {
+        this.state = 'END';
+        // execute draw sequence
+        alert("It's a draw.");
+      }
     }
   }
 
   reset() {
+    // reset game state to being playable
+    // reset board
+    // reset current player display
+    this.state = 'PLAY';
     this.renderer.clearBoard();
     this.renderer.updateTurn(this.currentPlayer());
   }
@@ -51,8 +62,10 @@ class Game {
       }
     }
 
-    // if current turn number is even, current player is X
-    // otherwise current player is O
+    // if current turn number is even:
+    // current player is last winner or X if it's a first game
+    // otherwise current player is opposite of last winner or O
+    // if it's a first game
     return turnNumber % 2 === 0 ? 'X' : 'O';
   }
 

@@ -1,8 +1,9 @@
 #banner {
   display: flex;
   justify-content: center;
+  font-family: arial;
+  font-size: x-large;
 }
-
 
 #game {
   display: flex;
