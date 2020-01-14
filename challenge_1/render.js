@@ -5,9 +5,11 @@ class Render {
 
   init() {
     // initial render of a blank board
-    this.drawUI();
+    this.drawUpperUI();
     this.drawBoard();
     this.drawGrid();
+    this.drawLowerUI();
+    // this.drawNameEntry();
     this.updateTurn();
   }
 
@@ -64,11 +66,12 @@ class Render {
     }
   }
 
-  drawUI() {
+  drawUpperUI() {
     var uiClass = 'uiElement';
     var game = select('game');
     var ui = create('div');
-    ui.id = "ui";
+    ui.setAttribute('class', 'ui');
+    ui.id = 'ui-upper';
 
     // create new child element to add to our UI counting
     // number of victories by each player
@@ -110,15 +113,43 @@ class Render {
     currentPlayer.id = "currentPlayer";
     currentPlayer.setAttribute('class', uiClass)
 
+    // placeholder for name entry
+    var extraElement = create('div');
+    extraElement.setAttribute('class', uiClass);
+
     ui.append(victoryCounter);
     ui.append(currentPlayer);
+    ui.append(extraElement);
 
     game.append(ui);
   }
 
+  drawLowerUI() {
+    var game = select('game');
+    var lowerUi = create('div');
+    lowerUi.id = 'ui-lower';
+    lowerUi.setAttribute('class', 'ui');
+
+    var resetButton = create('button');
+    resetButton.id = 'resetButton';
+    resetButton.innerHTML = 'Reset Game';
+
+    lowerUi.append(resetButton);
+    game.append(lowerUi);
+  }
+
+  clearBoard() {
+    for (var y = 0; y < 3; y++) {
+      for (var x = 0; x < 3; x++) {
+        var cell = select(`${x},${y}`);
+        cell.innerHTML = '';
+      }
+    }
+  }
+
   updateTurn(player) {
     var currentPlayer = select('currentPlayer');
-    currentPlayer.innerHTML = `It is ${player}'s turn`;
+    currentPlayer.innerHTML = `${player}'s turn`;
   }  
 
   updateWinner(player) {

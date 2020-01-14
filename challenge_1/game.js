@@ -34,6 +34,11 @@ class Game {
     }
   }
 
+  reset() {
+    this.renderer.clearBoard();
+    this.renderer.updateTurn(this.currentPlayer());
+  }
+
   currentPlayer() {
     var turnNumber = 0;
 

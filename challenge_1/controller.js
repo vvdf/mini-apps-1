@@ -4,11 +4,18 @@ class Controller {
   }
 
   init() {
-    var cells = selectByClass('cell');
-    board.addEventListener('click', this.handleClick);
+    var board = select('board');
+    board.addEventListener('click', this.handleBoardClick);
+
+    var resetButton = select('resetButton');
+    resetButton.addEventListener('click', this.handleReset);
   }
 
-  handleClick(event) {
+  handleBoardClick(event) {
     game.playerAction(event);
+  }
+
+  handleReset() {
+    game.reset();
   }
 }
