@@ -77,7 +77,7 @@ class Render {
     // create new child element to add to our UI counting
     // number of victories by each player
     var victoryCounter = create('div');
-    victoryCounter.setAttribute('class', uiClass);
+    victoryCounter.setAttribute('class', uiClass + ' uiList');
     victoryCounter.id = 'winCounter';
 
     var currentVictories = create('h3');
@@ -86,7 +86,7 @@ class Render {
     var xWinList = create('div');
     var xName = create('h4');
     var xWinCount = create('h4');
-    xWinList.setAttribute('class', 'uiList');
+    xWinList.setAttribute('class', 'uiListEntry');
     xName.innerHTML = 'X: ';
     xName.id = 'xName';
     xWinCount.innerHTML = '0';
@@ -95,7 +95,7 @@ class Render {
     xWinList.append(xWinCount);
 
     var yWinList = create('div');
-    yWinList.setAttribute('class', 'uiList');
+    yWinList.setAttribute('class', 'uiListEntry');
     var yName = create('h4');
     var yWinCount = create('h4');
     yName.innerHTML = 'Y: ';
@@ -114,28 +114,51 @@ class Render {
     currentPlayer.id = "currentPlayer";
     currentPlayer.setAttribute('class', uiClass)
 
-    // placeholder for name entry
-    var extraElement = create('div');
-    extraElement.setAttribute('class', uiClass);
-
     ui.append(victoryCounter);
     ui.append(currentPlayer);
-    ui.append(extraElement);
 
     game.append(ui);
   }
 
   drawLowerUI() {
+    var uiClass = 'uiElement';
     var game = select('game');
     var lowerUi = create('div');
     lowerUi.id = 'ui-lower';
     lowerUi.setAttribute('class', 'ui');
 
+    // create name entry area
+    var nameEntryForm = create('form');
+    nameEntryForm.setAttribute('class', 'uiElement');
+    var nameEntryHeader = create('h4');
+    nameEntryHeader.innerHTML = 'Add name to player:';
+    var selectionDropdown = create('select');
+    var optionX = create('option');
+    var optionY = create('option');
+    var textInputBox = create('input');
+    var submitButton = create('input');
+    optionX.innerHTML = 'X';
+    optionY.innerHTML = 'Y';
+    textInputBox.setAttribute('type', 'text');
+    submitButton.setAttribute('type', 'submit');
+
+    nameEntryForm.append(nameEntryHeader);
+    nameEntryForm.append(selectionDropdown);
+    selectionDropdown.append(optionX);
+    selectionDropdown.append(optionY);
+    nameEntryForm.append(textInputBox);
+    nameEntryForm.append(submitButton);
+
+    // create new game/reset button to add to the lower UI
+    var buttonContainer = create('div');
+    buttonContainer.setAttribute('class', uiClass);
     var resetButton = create('button');
     resetButton.id = 'resetButton';
     resetButton.innerHTML = 'New Game';
+    buttonContainer.append(resetButton);
 
-    lowerUi.append(resetButton);
+    lowerUi.append(nameEntryForm);
+    lowerUi.append(buttonContainer);
     game.append(lowerUi);
   }
 
