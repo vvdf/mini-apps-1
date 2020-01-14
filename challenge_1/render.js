@@ -23,6 +23,7 @@ class Render {
       // generate rows with divs
       var row = create('div');
       row.className = 'row';
+      row.id = `row${y}`;
 
       for (var x = 0; x < 3; x++) {
         var cell = create('div');
@@ -139,12 +140,34 @@ class Render {
   }
 
   clearBoard() {
-    for (var y = 0; y < 3; y++) {
-      for (var x = 0; x < 3; x++) {
-        var cell = select(`${x},${y}`);
-        cell.innerHTML = '';
-      }
+    var board = select('board');
+
+    // delete rows without deleting board so I don't have to
+    // worry about board reinsertion
+    for (var i = 0; i < 3; i++) {
+      var rowToDelete = select(`row${i}`);
+      board.removeChild(rowToDelete);
     }
+
+    for (var y = 0; y < 3; y++) {
+      // generate rows with divs
+      var row = create('div');
+      row.className = 'row';
+      row.id = `row${y}`;
+
+      for (var x = 0; x < 3; x++) {
+        var cell = create('div');
+        cell.className = 'cell';
+        cell.id = `${x},${y}`
+        cell.innerHTML = '';
+        row.append(cell);
+      }
+      
+      // populate board with created row divs
+      board.append(row);
+    }
+
+    this.drawGrid();
   }
 
   updateTurn(player) {
