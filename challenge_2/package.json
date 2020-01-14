@@ -1,0 +1,23 @@
+{
+  "name": "json-csv-converter",
+  "version": "1.0.0",
+  "description": "Convert JSON to CSV",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/7FFF00/mini-apps-1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/7FFF00/mini-apps-1/issues"
+  },
+  "homepage": "https://github.com/7FFF00/mini-apps-1#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
