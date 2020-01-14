@@ -1,7 +1,10 @@
 var express = require('express');
-var app = express();
 var path = require('path');
+var app = express();
+var convert = require('./server/jsonToCSV.js').convert;
 var PORT = 3000;
+
+app.use(express.json());
 
 app.get('/', (req, res, next) => {
   console.log(`${req.method} request at url ${req.url}`);
@@ -10,8 +13,8 @@ app.get('/', (req, res, next) => {
 
 app.post('/api/JSONconvert', (req, res) => {
   console.log(`${req.method} request at url ${req.url}`);
-  console.log(req.body);
-  res.send('JSON received');
+  var csvOutput = convert(req.body);
+  res.status(201).send(csvOutput);
 });
 
 app.use('/', express.static('client'));

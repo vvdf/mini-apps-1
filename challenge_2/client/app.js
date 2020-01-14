@@ -6,9 +6,9 @@ var init = () => {
   jsonSubmit.addEventListener('click', (event) => {
     // take input from json input box
     var inputBox = select('JSONinput');
-    var inputText = JSON.stringify(inputBox.value);
+    var inputText = inputBox.value; // unsanitized html string
+    inputText = inputText.replace('\n', ''); // sanitized for json
     // inputBox.value = ''; // clear input box
-    console.log(inputText, " cached to be sent");
 
     // call to POST via fetch, taking in USVstring endpoint and options
     fetch('/api/JSONconvert', {
@@ -19,8 +19,14 @@ var init = () => {
       }
     })
       .then(response => {
-        // output converted data to csv output box
-        console.log(response);
+        // output converted data to csv output box, response is a promise
+        // call the text() promise making function to resolve to text
+        return response.text();
+      })
+      .then(text => {
+        // handle resolved text, outputting to CSVoutput textarea
+        var outputBox = select('CSVoutput');
+        outputBox.value = text;
       });
   });
 };
