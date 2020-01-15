@@ -8,15 +8,23 @@
 <body>
   <div class="container">
     <form id="JSONform" class="content">
-      <h1 class="title">JSON Input</h1>
-      <textarea id="JSONinput" class="input textbox" type="text"></textarea>
-      <input id="JSONsubmit" class="button is-primary" type="button" value="Submit JSON" />
+      <h1 class="title has-text-primary">JSON Input</h1>
+      <textarea id="JSONinput" class="input textbox" type="text" placeholder="Input JSON"></textarea>
+      <div id="JSONbuttons">
+        <input id="JSONfileAction" type="file" />
+        <input id="JSONfileButton" class="button is-primary" type="button" value="Upload JSON File" />
+        <input id="JSONsubmit" class="button is-primary" type="button" value="Submit JSON" />
+      </div>
     </form>
     <form id="CSVform" class="content">
-      <h1 class="title">CSV Output</h1>
-      <textarea id="CSVoutput" class="input textbox" type="text"></textarea>
+      <h1 class="title has-text-primary">CSV Output</h1>
+      <textarea id="CSVoutput" class="input textbox" type="text" placeholder="Output CSV" ></textarea>
+      <input id="CSVsave" class="button is-primary" type="button" value="Save CSV File" />
     </form>
   </div>
+  <script src="render.js"></script>
+  <script src="controller.js"></script>
   <script src="app.js"></script>
+  <script src="index.js"></script>
 </body>
 </html>

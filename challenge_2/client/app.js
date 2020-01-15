@@ -1,14 +1,17 @@
-var select = (domElement) => document.getElementById(domElement);
-var create = (domElement) => document.createElement(domElement);
+class App {
+  constructor() {
+    this.init();
+  }
 
-var init = () => {
-  var jsonSubmit = select('JSONsubmit');
-  jsonSubmit.addEventListener('click', (event) => {
-    // take input from json input box
+  init() {
+    this.render = new Render();
+    this.controller = new Controller();
+  }
+
+  submitHandler() {
     var inputBox = select('JSONinput');
     var inputText = inputBox.value; // unsanitized html string
     inputText = inputText.replace('\n', ''); // sanitized for json
-    // inputBox.value = ''; // clear input box
 
     // call to POST via fetch, taking in USVstring endpoint and options
     fetch('/api/JSONconvert', {
@@ -25,10 +28,25 @@ var init = () => {
       })
       .then(text => {
         // handle resolved text, outputting to CSVoutput textarea
-        var outputBox = select('CSVoutput');
-        outputBox.value = text;
+        this.render.handleOutput(text);
       });
-  });
-};
+  }
 
-init();
+  saveHandler() {
+    var outputText = select('CSVoutput').value;
+    var a = create('a');
+    a.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(outputText));
+    a.setAttribute('download', 'converted.csv');
+    a.click();
+  }
+
+  uploadHandler() {
+    var uploadAction = select('JSONfileAction');
+    uploadAction.click();
+    var fileList = uploadAction.files;
+    uploadAction.files[0].text()
+      .then(fileText => {
+        this.render.handleInput(fileText);
+      });
+  }
+}
