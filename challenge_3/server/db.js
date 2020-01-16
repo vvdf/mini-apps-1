@@ -15,7 +15,7 @@ connection.connect();
 // TRANSACTION columns: id user_id address1 address2 city state zip phone 
 //  ccn exp cvv billing_zip
 
-connection.query('SHOW tables', (err, results, fields) => {
-  console.log(results);
-});
+// connection.query('SHOW tables', (err, results, fields) => {
+//   console.log(results);
+// });
 
