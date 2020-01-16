@@ -66,7 +66,7 @@ class App extends React.Component {
 
   nextStep() {
     var stepPermitted = true;
-    
+
     if (this.state.checkoutStep > 0) {
       var currentInputs = this.state.formInput[this.state.checkoutStep - 1].map(inputEntry => inputEntry.replace(/ /g, '-'));
       var currentValues = currentInputs.map(inputEntrySanitized => {
@@ -76,8 +76,8 @@ class App extends React.Component {
     }
 
     if (stepPermitted) {
-      // clear inputs for form elements
       this.clearForms();
+      
 
       this.setState({
         checkoutStep: (this.state.checkoutStep + 1) % 4
